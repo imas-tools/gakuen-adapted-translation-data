@@ -2,8 +2,8 @@ import os
 import shutil
 
 # supposed to return ***.txt
-def read_original_name(root_dir, file_path):
-    with open(os.path.join(root_dir, file_path), 'r') as file:
+def read_original_name(sub_dir, file_path):
+    with open(os.path.join(sub_dir, file_path), 'r') as file:
         for line in file:
             if line.startswith('info'):
                 return line.split(',')[1].strip()
@@ -21,7 +21,7 @@ def move_csv_files(root_dir, dest_dir=None):
             print("file found: ", file)
             if file.endswith(".csv"):
                 # 去掉文件扩展名
-                file_name = os.path.splitext(read_original_name(root_dir, file))[0]
+                file_name = os.path.splitext(read_original_name(subdir, file))[0]
                 # 使用下划线分隔文件名，创建新目录结构
                 new_path = os.path.join(dest_dir, *file_name.split('_')) + ".csv"
                 print(new_path)
