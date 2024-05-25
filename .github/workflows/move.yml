@@ -1,4 +1,4 @@
-name: Move Tmp Files to Data
+name: Move Tmp Files to Data And Update Index
 
 on:
   push:
@@ -23,8 +23,13 @@ jobs:
       run: |
         python move.py
 
+    - name: Install dependencies
+      run: pip install -r ./requirements.txt
+    - name: Update index
+      run: python scripts/gen_index.py
+
     - name: Commit changes
       id: asset-auto-commit-action
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: "Move tmp files to data"
+        commit_message: "Move tmp files to data and update index"
