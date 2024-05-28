@@ -3,7 +3,7 @@ import shutil
 
 # supposed to return ***.txt
 def read_original_name(sub_dir, file_path):
-    with open(os.path.join(sub_dir, file_path), 'r') as file:
+    with open(os.path.join(sub_dir, file_path), 'r', encoding='utf-8') as file:
         for line in file:
             if line.startswith('info'):
                 return line.split(',')[1].strip()

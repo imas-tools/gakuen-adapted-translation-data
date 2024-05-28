@@ -21,7 +21,7 @@ jobs:
 
     - name: Move files
       run: |
-        python move.py
+        python scripts/move.py
 
     - name: Install dependencies
       run: pip install -r ./requirements.txt
