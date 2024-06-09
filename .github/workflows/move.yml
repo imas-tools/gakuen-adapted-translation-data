@@ -22,12 +22,13 @@ jobs:
       with:
         ref: main
 
+    - name: Install dependencies
+      run: pip install -r ./requirements.txt
+
     - name: Move files
       run: |
         python scripts/move.py
 
-    - name: Install dependencies
-      run: pip install -r ./requirements.txt
     - name: Update index
       run: python scripts/gen_index.py
 
