@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Fetch all history
-        run: git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        run: git fetch --no-tags --unshallow origin +refs/heads/*:refs/remotes/origin/*
 
       - name: Checkout main branch
         run: git checkout main
