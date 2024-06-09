@@ -1,0 +1,36 @@
+name: Test Merge to Main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test_merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Fetch all history
+        run: git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+
+      - name: Checkout main branch
+        run: git checkout main
+
+      - name: Merge PR branch into main
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git merge --no-ff ${{ github.head_ref }} -m "Merge PR branch to test merge conflict"
+
+      - name: Install dependencies
+        run: pip install -r ./requirements.txt
+
+      - name: Move files
+        run: |
+          python scripts/move.py
+      - name: Update index
+        run: python scripts/gen_index.py
