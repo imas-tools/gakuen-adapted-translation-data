@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
@@ -19,6 +19,15 @@ jobs:
 
       - name: Checkout main branch
         run: git checkout main
+
+      - name: Check Git version
+        run: git --version
+
+      - name: Show remote branches
+        run: git branch -r
+
+      - name: Show current branch
+        run: git branch
 
       - name: Merge PR branch into main
         run: |
