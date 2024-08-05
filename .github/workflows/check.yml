@@ -35,8 +35,13 @@ jobs:
           git config user.email "actions@github.com"
           git merge --no-ff ${{ github.head_ref }} -m "Merge PR branch to test merge conflict"
 
+      - name: show logs
+        run: git logs
+
       - name: Install dependencies
         run: pip install -r ./requirements.txt
+
+
 
       - name: Move files
         run: |
